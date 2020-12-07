@@ -2,27 +2,37 @@
 <html lang='en'>
   <head>
     <meta charset='utf-8' />
-    <title>Armadillo Editor Version 1.1</title>
+    <title>a.bhi text editor - web version</title>
     <link rel='icon' type='image/jpg' href='res/favicon.png' />
 		<link rel='stylesheet' href='style.css' type='text/css' />
     <script src='main.js' type='text/javascript'></script>
   </head>
   <body>
-    <section>
-      <div class='active'>
-        <h1 class='title'>HTML</h1>
-        <textarea id='html' spellcheck='false' placeholder='...'></textarea>
-      </div>
-      <div>
-        <h1 class='title'>CSS</h1>
-        <textarea id='css' spellcheck='false' placeholder='...'></textarea>
-      </div>
-      <div>
-        <h1 class='title'>JS</h1>
-        <textarea id='js' spellcheck='false' placeholder='...'></textarea>
-      </div>
-    </section>
-    <section><iframe id='output'></iframe></section>
-    <input type='file' id='file_input' hidden />
+		<div id='mainmenu' class='screen active'>
+			<section id='titlescreen'>
+				<h1 class='screentitle'>a.bhi_texteditor - web version</h1>
+				<button id='new-file'>New File</button>
+				<button id='load-file'>Load File</button>
+			</section>
+		</div>
+		<div id='editor' class='screen'>
+			<section id='code'>
+				<div class='active'>
+					<h1 class='title'>HTML</h1>
+					<textarea id='html' spellcheck='false' placeholder='...'></textarea>
+				</div>
+				<div>
+					<h1 class='title'>CSS</h1>
+					<textarea id='css' spellcheck='false' placeholder='...'></textarea>
+				</div>
+				<div>
+					<h1 class='title'>JS</h1>
+					<textarea id='js' spellcheck='false' placeholder='...'></textarea>
+				</div>
+			</section>
+			<section><iframe id='output'></iframe></section>
+			<button id='run'>&gt;</button>
+		</div>
+		<input type='file' id='file_input' hidden />
   </body>
 </html>

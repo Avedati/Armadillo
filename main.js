@@ -1,3 +1,5 @@
+// TODO: write comments for new functions.
+
 /*
 
 	window.onload()
@@ -11,6 +13,7 @@ window.onload = function() {
 	var css_input = document.getElementById('css');
 	var js_input = document.getElementById('js');
 	var output = document.getElementById('output');
+	var filename = 'untitled.json';
 	var alt = false;
 	
 	/*
@@ -25,7 +28,9 @@ window.onload = function() {
 	
 	[...document.getElementsByClassName('title')].forEach(function(v) {
 		v.onclick = function(ev) {
-			var activeElements = [...document.getElementsByClassName('active')];
+			var activeElements = [...document.getElementById('code').children].filter(function(child) {
+				return child.classList.contains('active');
+			});
 			if(activeElements.length > 0) { activeElements[0].classList.remove('active'); }
 			this.parentElement.classList.add('active');
 		};
@@ -65,11 +70,13 @@ window.onload = function() {
 	
 	document.getElementById('file_input').onchange = function(ev) {
 		var fr = new FileReader();
-		fr.onload = function() {
+		// https://stackoverflow.com/questions/24245105/how-to-get-the-filename-from-the-javascript-filereader
+		fr.onload = function(readEvt) {
 			var json = JSON.parse(fr.result);
 			html_input.value = json.html || '';
 			css_input.value = json.css || '';
 			js_input.value = json.js || '';
+			filename = ev.target.files[0].name;
 		}
 		fr.readAsText(ev.target.files[0]);
 	};
@@ -105,15 +112,11 @@ window.onload = function() {
 				'js':js_input.value
 			};
 			el.setAttribute('href', 'data:text/plain;charset=utf-8,' + JSON.stringify(json));
-			el.setAttribute('download', 'untitled.json');
+			el.setAttribute('download', filename);
 			el.style.display = 'none';
 			document.body.appendChild(el);
 			el.click();
 			document.body.removeChild(el);
-		}
-		else if(ev.keyCode === 79 && alt) {
-			ev.preventDefault();
-			document.getElementById('file_input').click();
 		}
 	};
 	
@@ -129,6 +132,26 @@ window.onload = function() {
 	
 	window.onkeyup = function(ev) {
 		if(ev.keyCode === 18) { alt = false; }
+	};
+
+	document.getElementById('run').onclick = function() {
+		var doc = output.contentDocument || output.contentWindow.document;
+		doc.open();
+		doc.write(html_input.value);
+		doc.body.innerHTML += '<style type=\'text/css\'>' + css_input.value + '</style>';
+		doc.body.innerHTML += '<script type=\'text/javascript\'>' + js_input.value + '<\/script>';
+		doc.close();
+	};
+
+	document.getElementById('new-file').onclick = function() {
+		document.getElementById('mainmenu').classList.remove('active');	
+		document.getElementById('editor').classList.add('active');	
+	};
+
+	document.getElementById('load-file').onclick = function() {
+		document.getElementById('file_input').click();
+		document.getElementById('mainmenu').classList.remove('active');	
+		document.getElementById('editor').classList.add('active');	
 	};
 };
 

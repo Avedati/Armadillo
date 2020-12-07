@@ -11,6 +11,50 @@
 	overflow:hidden;
 }
 
+div.screen {
+		position:absolute;
+		left:0;
+		top:0;
+		width:100vw;
+		height:100vh;
+		z-index:1;
+}
+
+div.screen.active {
+		z-index:3;
+}
+
+section#titlescreen {
+		background:black;
+		color:white;
+}
+
+h1.screentitle {
+		float:left;
+		width:100%;
+		height:10%;
+		display:flex;
+		justify-content:center;
+		align-items:center;
+		font-family:'Roboto Mono';
+}
+
+button#new-file {
+		position:absolute;
+		left:10vw;
+		top:25vh;
+		width:30%;
+		height:10%;
+}
+
+button#load-file {
+		position:absolute;
+		left:10vw;
+		top:40vh;
+		width:30%;
+		height:10%;
+}
+
 section {
 	float:left;
 	width:50%;
@@ -18,12 +62,15 @@ section {
 	background:white;
 }
 
+section#code { background:black; }
+
 section div {
 	float:left;
 	width:calc(100% - 20px);
-	height:calc(10% - 20px);
+	height:calc(10vh - 20px);
 	margin:10px;
 	transition:all .5s;
+	background:#1a1a1c;
 }
 
 section div.active {
@@ -34,9 +81,9 @@ section div h1 {
 	float:left;
 	padding:10px;
 	width:calc(100% - 20px);
-	height:calc(10vh - 20px);
-	background:#dbdbdb;
-	color:black;
+	height:calc(10vh - 40px);
+	background:inherit;
+	color:white;
 	font-family:'Roboto Mono';
 	cursor:default;
 	display:flex;
@@ -54,7 +101,28 @@ section div textarea {
 	padding:10px;
 	width:calc(100% - 20px);
 	height:calc(calc(100% - 10vh) - 20px);
-	background:#dbdbdb;
-	color:black;
+	background:inherit;
+	color:white;
 	font-family:'Roboto Mono';
+}
+
+button#run {
+	position:absolute;
+	width:42px;
+	height:42px;
+	left:43vw;
+	top:2.3vh;
+	background:black;
+	color:white;
+	font-family:'Anonymous Pro';
+	font-size:24px;
+	border-radius:50px;
+	margin:0;
+	padding:0;
+	cursor:default;
+	transition:.5s;
+}
+
+button#run:hover {
+	color:green;
 }
